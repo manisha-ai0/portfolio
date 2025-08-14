@@ -4,8 +4,146 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>My Portfolio — Manisha Rani</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    /* ---------- THEME ---------- */
+    :root{
+      --space-1:#05060f;    /* deep space */
+      --space-2:#0a0f2a;    /* outer glow */
+      --accent:#ff6b6b;     /* rocket flame / accents */
+      --card-bg:rgba(255,255,255,.08);
+      --card-stroke:rgba(255,255,255,.14);
+      --text:#e8ecff;
+      --muted:#b8c1ff;
+    }
+    /* ---------- RESET ---------- */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 50% 100%, var(--space-2), var(--space-1) 70%);
+      overflow-x:hidden;
+    }
 
+    /* ---------- SPACE BACKGROUND LAYERS ---------- */
+    .space{
+      position:fixed; inset:0; z-index:-1; overflow:hidden;
+      pointer-events:none;
+    }
+    /* twinkling starfield container; stars inserted by tiny JS for performance */
+    .stars{position:absolute; inset:0; filter:drop-shadow(0 0 2px rgba(255,255,255,.35))}
+    .star{
+      position:absolute; width:2px; height:2px; border-radius:50%;
+      background:radial-gradient(circle,#fff,rgba(255,255,255,.1) 60%, transparent 70%);
+      animation: twinkle 2.2s infinite ease-in-out;
+      opacity:.75;
+    }
+    @keyframes twinkle{
+      0%,100%{transform:scale(1); opacity:.7}
+      50%{transform:scale(1.7); opacity:1}
+    }
+
+    /* Orbits + Planets */
+    .orbit{
+      position:absolute; border:1px dashed rgba(255,255,255,.08);
+      border-radius:50%; left:50%; top:55%; transform:translate(-50%,-50%);
+      animation: spin linear infinite;
+    }
+    .orbit--1{ width:480px; height:480px; animation-duration:36s }
+    .orbit--2{ width:700px; height:700px; animation-duration:58s }
+    .orbit--3{ width:980px; height:980px; animation-duration:96s }
+    @keyframes spin{ to{ transform:translate(-50%,-50%) rotate(360deg) } }
+
+    .planet{
+      position:absolute; top:50%; left:0; transform:translate(-50%,-50%);
+      border-radius:50%;
+      box-shadow: inset -10px -10px 18px rgba(0,0,0,.35),
+                  0 0 20px rgba(255,255,255,.05);
+    }
+    .planet--neptune{ width:26px; height:26px; background:linear-gradient(135deg,#79aaff,#2b5fff); }
+    .planet--mars   { width:22px; height:22px; background:linear-gradient(135deg,#ff9b5f,#e24b2d); }
+    .planet--saturn { width:34px; height:34px; background:linear-gradient(135deg,#ffd9a6,#d2a867); }
+    /* saturn ring */
+    .planet--saturn::after{
+      content:""; position:absolute; inset:-6px -18px; border:2px solid rgba(255,255,255,.45);
+      border-left-color:transparent; border-right-color:transparent; border-radius:50%;
+      transform:rotate(18deg);
+      filter:drop-shadow(0 0 6px rgba(255,255,255,.12));
+    }
+
+    /* Rockets (pure CSS + inline SVG) */
+    .rocket{
+      position:absolute; width:56px; height:56px; will-change:transform;
+      animation-timing-function: linear; animation-iteration-count: infinite;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,.5));
+    }
+    .rocket svg{ width:100%; height:100% }
+    .rocket--1{ left:-70px; top:20vh; animation-name: fly1; animation-duration: 28s }
+    .rocket--2{ right:-70px; top:70vh; animation-name: fly2; animation-duration: 34s }
+    @keyframes fly1{ 
+      0%{ transform:translateX(0) translateY(0) rotate(15deg) }
+      50%{ transform:translateX(120vw) translateY(-10vh) rotate(20deg) }
+      100%{ transform:translateX(240vw) translateY(-18vh) rotate(25deg) }
+    }
+    @keyframes fly2{ 
+      0%{ transform:translateX(0) translateY(0) rotate(-160deg) }
+      50%{ transform:translateX(-120vw) translateY(10vh) rotate(-170deg) }
+      100%{ transform:translateX(-240vw) translateY(18vh) rotate(-180deg) }
+    }
+    /* little flame flicker */
+    .flame{ transform-origin:50% 100%; animation: flame .18s infinite alternate ease-in-out }
+    @keyframes flame{ from{ transform:scaleY(.85) } to{ transform:scaleY(1.1) } }
+
+    /* ---------- CONTENT LAYOUT ---------- */
+    header{
+      background: linear-gradient(0deg, rgba(0,0,0,.4), rgba(0,0,0,.2));
+      border-bottom:1px solid var(--card-stroke);
+      text-align:center; padding:18px 14px;
+      backdrop-filter:saturate(140%) blur(6px);
+    }
+    header h1{ margin:0; font-size: clamp(24px, 2.6vw, 34px) }
+    header p{ margin:6px 0 0; color:var(--muted) }
+
+    main{ max-width:920px; margin:0 auto; padding: 28px 16px 80px }
+
+    section{
+      background:var(--card-bg); border:1px solid var(--card-stroke);
+      border-radius:14px; padding:20px; margin:18px auto;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    }
+    h2{
+      margin:0 0 10px; font-size: clamp(20px, 2vw, 24px);
+      border-bottom:1px dashed rgba(255,255,255,.12); padding-bottom:8px;
+    }
+    .project{
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:12px; padding:12px 14px; margin:12px 0;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .project:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.09);
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+    }
+    .project a{
+      color:#9dd6ff; text-decoration:none; border-bottom:1px dashed rgba(157,214,255,.5);
+    }
+    .project a:hover{ color:#c5e6ff; border-bottom-color:transparent }
+
+    footer{
+      text-align:center; padding:14px; color:var(--muted);
+      border-top:1px solid var(--card-stroke);
+      background: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.35));
+    }
+
+    /* ---------- RESPONSIVE NICETIES ---------- */
+    @media (min-width: 768px){
+      .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap:16px }
+    }
+  </style>
 </head>
 <body>
 
@@ -59,25 +197,22 @@
     <section>
       <h2>About Me</h2>
       <p>
-        Hi! I’m Manisha, a passionate learner building projects every day.
-        My goal is to work in AI and tech innovation.
+        I am Manisha, an ardent learner dedicated to crafting innovative projects daily.
+         My ambition lies in advancing the frontiers of AI and transformative technology
       </p>
     </section>
 
     <section>
       <h2>Projects</h2>
-      
       <div class="project">
-        <h3>Project 1: To-Do List App</h3>
+        <h3>To-Do List App</h3>
         <p>A simple app to manage tasks efficiently. Built with HTML, CSS, and JavaScript.</p>
-        <!-- replace with your real repo -->
         <a href="https://github.com/manisha-ai0/To-Do-List.git" target="_blank" rel="noopener">View on GitHub</a>
       </div>
 
       <div class="project">
-        <h3>Project 2: Portfolio Website</h3>
+        <h3>Portfolio Website</h3>
         <p>This portfolio website to showcase my work.</p>
-        <!-- replace with your real repo -->
         <a href="https://github.com/manisha-ai0/portfolio.git" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </section>
@@ -101,6 +236,40 @@
     <p>© 2025 Manisha Rani • Built with 🚀 & stars</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Create a performant starfield (no heavy shadows / gradients per star)
+    (function makeStars(){
+      const wrap = document.getElementById('stars');
+      const count = Math.min(220, Math.floor((window.innerWidth*window.innerHeight)/5000)); // scale with screen
+      const rand = (min,max)=>Math.random()*(max-min)+min;
+      const frag = document.createDocumentFragment();
+      for(let i=0;i<count;i++){
+        const s=document.createElement('div');
+        s.className='star';
+        const size = Math.random()<0.12 ? 2.5 : 2; // a few brighter stars
+        s.style.width = size+'px';
+        s.style.height= size+'px';
+        s.style.left  = rand(0, window.innerWidth)+'px';
+        s.style.top   = rand(0, window.innerHeight)+'px';
+        s.style.animationDelay = rand(0,2.2)+'s';
+        frag.appendChild(s);
+      }
+      wrap.appendChild(frag);
+    })();
+
+    // Subtle parallax on mouse move for planets layer
+    (function parallax(){
+      const orbits = document.querySelectorAll('.orbit');
+      let cx = window.innerWidth/2, cy = window.innerHeight/2;
+      window.addEventListener('mousemove', e=>{
+        const dx = (e.clientX - cx) / window.innerWidth;
+        const dy = (e.clientY - cy) / window.innerHeight;
+        orbits.forEach((o,idx)=>{
+          const depth = (idx+1)*2; // different layers
+          o.style.transform = `translate(calc(-50% + ${dx*depth*6}px), calc(-50% + ${dy*depth*4}px)) rotate(0deg)`;
+        });
+      }, {passive:true});
+    })();
+  </script>
 </body>
 </html>
