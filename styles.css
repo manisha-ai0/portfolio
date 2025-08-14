@@ -1,133 +1,141 @@
 /* ---------- THEME ---------- */
-:root{
-  --space-1:#05060f;    /* deep space */
-  --space-2:#0a0f2a;    /* outer glow */
-  --accent:#ff6b6b;     /* rocket flame / accents */
-  --card-bg:rgba(255,255,255,.08);
-  --card-stroke:rgba(255,255,255,.14);
-  --text:#e8ecff;
-  --muted:#b8c1ff;
+:root {
+  --space-1: #05060f;    /* deep space */
+  --space-2: #0a0f2a;    /* outer glow */
+  --accent: #ff6b6b;     /* rocket flame / accents */
+  --card-bg: rgba(255, 255, 255, .08);
+  --card-stroke: rgba(255, 255, 255, .14);
+  --text: #e8ecff;
+  --muted: #b8c1ff;
 }
+
 /* ---------- RESET ---------- */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,Arial,sans-serif;
-  color:var(--text);
-  background: radial-gradient(1200px 800px at 50% 100%, var(--space-2), var(--space-1) 70%);
-  overflow-x:hidden;
+* { box-sizing: border-box }
+html, body { height: 100% }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Inter, Arial, sans-serif;
+  color: var(--text);
+
+  /* Your gradient + stars background */
+  background:
+    url('images/stars.png') repeat, 
+    radial-gradient(1200px 800px at 50% 100%, var(--space-2), var(--space-1) 70%);
+  background-size: auto, cover;
+
+  overflow-x: hidden;
 }
 
 /* ---------- SPACE BACKGROUND LAYERS ---------- */
-.space{
-  position:fixed; inset:0; z-index:-1; overflow:hidden;
-  pointer-events:none;
+.space {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden;
+  pointer-events: none;
 }
+
 /* twinkling starfield container; stars inserted by tiny JS for performance */
-.stars{position:absolute; inset:0; filter:drop-shadow(0 0 2px rgba(255,255,255,.35))}
-.star{
-  position:absolute; width:2px; height:2px; border-radius:50%;
-  background:radial-gradient(circle,#fff,rgba(255,255,255,.1) 60%, transparent 70%);
+.stars { position: absolute; inset: 0; filter: drop-shadow(0 0 2px rgba(255,255,255,.35)) }
+.star {
+  position: absolute; width: 2px; height: 2px; border-radius: 50%;
+  background: radial-gradient(circle, #fff, rgba(255,255,255,.1) 60%, transparent 70%);
   animation: twinkle 2.2s infinite ease-in-out;
-  opacity:.75;
+  opacity: .75;
 }
-@keyframes twinkle{
-  0%,100%{transform:scale(1); opacity:.7}
-  50%{transform:scale(1.7); opacity:1}
+@keyframes twinkle {
+  0%, 100% { transform: scale(1); opacity: .7 }
+  50% { transform: scale(1.7); opacity: 1 }
 }
 
 /* Orbits + Planets */
-.orbit{
-  position:absolute; border:1px dashed rgba(255,255,255,.08);
-  border-radius:50%; left:50%; top:55%; transform:translate(-50%,-50%);
+.orbit {
+  position: absolute; border: 1px dashed rgba(255,255,255,.08);
+  border-radius: 50%; left: 50%; top: 55%; transform: translate(-50%, -50%);
   animation: spin linear infinite;
 }
-.orbit--1{ width:480px; height:480px; animation-duration:36s }
-.orbit--2{ width:700px; height:700px; animation-duration:58s }
-.orbit--3{ width:980px; height:980px; animation-duration:96s }
-@keyframes spin{ to{ transform:translate(-50%,-50%) rotate(360deg) } }
+.orbit--1 { width: 480px; height: 480px; animation-duration: 36s }
+.orbit--2 { width: 700px; height: 700px; animation-duration: 58s }
+.orbit--3 { width: 980px; height: 980px; animation-duration: 96s }
+@keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg) } }
 
-.planet{
-  position:absolute; top:50%; left:0; transform:translate(-50%,-50%);
-  border-radius:50%;
+.planet {
+  position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%);
+  border-radius: 50%;
   box-shadow: inset -10px -10px 18px rgba(0,0,0,.35),
               0 0 20px rgba(255,255,255,.05);
 }
-.planet--neptune{ width:26px; height:26px; background:linear-gradient(135deg,#79aaff,#2b5fff); }
-.planet--mars   { width:22px; height:22px; background:linear-gradient(135deg,#ff9b5f,#e24b2d); }
-.planet--saturn { width:34px; height:34px; background:linear-gradient(135deg,#ffd9a6,#d2a867); }
+.planet--neptune { width: 26px; height: 26px; background: linear-gradient(135deg, #79aaff, #2b5fff); }
+.planet--mars    { width: 22px; height: 22px; background: linear-gradient(135deg, #ff9b5f, #e24b2d); }
+.planet--saturn  { width: 34px; height: 34px; background: linear-gradient(135deg, #ffd9a6, #d2a867); }
+
 /* saturn ring */
-.planet--saturn::after{
-  content:""; position:absolute; inset:-6px -18px; border:2px solid rgba(255,255,255,.45);
-  border-left-color:transparent; border-right-color:transparent; border-radius:50%;
-  transform:rotate(18deg);
-  filter:drop-shadow(0 0 6px rgba(255,255,255,.12));
+.planet--saturn::after {
+  content: ""; position: absolute; inset: -6px -18px; border: 2px solid rgba(255,255,255,.45);
+  border-left-color: transparent; border-right-color: transparent; border-radius: 50%;
+  transform: rotate(18deg);
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.12));
 }
 
-/* Rockets (pure CSS + inline SVG) */
-.rocket{
-  position:absolute; width:56px; height:56px; will-change:transform;
+/* Rockets */
+.rocket {
+  position: absolute; width: 56px; height: 56px; will-change: transform;
   animation-timing-function: linear; animation-iteration-count: infinite;
   filter: drop-shadow(0 6px 12px rgba(0,0,0,.5));
 }
-.rocket svg{ width:100%; height:100% }
-.rocket--1{ left:-70px; top:20vh; animation-name: fly1; animation-duration: 28s }
-.rocket--2{ right:-70px; top:70vh; animation-name: fly2; animation-duration: 34s }
-@keyframes fly1{ 
-  0%{ transform:translateX(0) translateY(0) rotate(15deg) }
-  50%{ transform:translateX(120vw) translateY(-10vh) rotate(20deg) }
-  100%{ transform:translateX(240vw) translateY(-18vh) rotate(25deg) }
+.rocket svg { width: 100%; height: 100% }
+.rocket--1 { left: -70px; top: 20vh; animation-name: fly1; animation-duration: 28s }
+.rocket--2 { right: -70px; top: 70vh; animation-name: fly2; animation-duration: 34s }
+@keyframes fly1 { 
+  0% { transform: translateX(0) translateY(0) rotate(15deg) }
+  50% { transform: translateX(120vw) translateY(-10vh) rotate(20deg) }
+  100% { transform: translateX(240vw) translateY(-18vh) rotate(25deg) }
 }
-@keyframes fly2{ 
-  0%{ transform:translateX(0) translateY(0) rotate(-160deg) }
-  50%{ transform:translateX(-120vw) translateY(10vh) rotate(-170deg) }
-  100%{ transform:translateX(-240vw) translateY(18vh) rotate(-180deg) }
+@keyframes fly2 { 
+  0% { transform: translateX(0) translateY(0) rotate(-160deg) }
+  50% { transform: translateX(-120vw) translateY(10vh) rotate(-170deg) }
+  100% { transform: translateX(-240vw) translateY(18vh) rotate(-180deg) }
 }
 /* little flame flicker */
-.flame{ transform-origin:50% 100%; animation: flame .18s infinite alternate ease-in-out }
-@keyframes flame{ from{ transform:scaleY(.85) } to{ transform:scaleY(1.1) } }
+.flame { transform-origin: 50% 100%; animation: flame .18s infinite alternate ease-in-out }
+@keyframes flame { from { transform: scaleY(.85) } to { transform: scaleY(1.1) } }
 
 /* ---------- CONTENT LAYOUT ---------- */
-header{
+header {
   background: linear-gradient(0deg, rgba(0,0,0,.4), rgba(0,0,0,.2));
-  border-bottom:1px solid var(--card-stroke);
-  text-align:center; padding:18px 14px;
-  backdrop-filter:saturate(140%) blur(6px);
+  border-bottom: 1px solid var(--card-stroke);
+  text-align: center; padding: 18px 14px;
+  backdrop-filter: saturate(140%) blur(6px);
 }
-header h1{ margin:0; font-size: clamp(24px, 2.6vw, 34px) }
-header p{ margin:6px 0 0; color:var(--muted) }
+header h1 { margin: 0; font-size: clamp(24px, 2.6vw, 34px) }
+header p { margin: 6px 0 0; color: var(--muted) }
 
-main{ max-width:920px; margin:0 auto; padding: 28px 16px 80px }
+main { max-width: 920px; margin: 0 auto; padding: 28px 16px 80px }
 
-section{
-  background:var(--card-bg); border:1px solid var(--card-stroke);
-  border-radius:14px; padding:20px; margin:18px auto;
+section {
+  background: var(--card-bg); border: 1px solid var(--card-stroke);
+  border-radius: 14px; padding: 20px; margin: 18px auto;
   backdrop-filter: blur(8px);
   box-shadow: 0 8px 24px rgba(0,0,0,.25);
 }
-h2{
-  margin:0 0 10px; font-size: clamp(20px, 2vw, 24px);
-  border-bottom:1px dashed rgba(255,255,255,.12); padding-bottom:8px;
+h2 {
+  margin: 0 0 10px; font-size: clamp(20px, 2vw, 24px);
+  border-bottom: 1px dashed rgba(255,255,255,.12); padding-bottom: 8px;
 }
-.project{
+.project {
   background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:12px; padding:12px 14px; margin:12px 0;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px; padding: 12px 14px; margin: 12px 0;
   transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
-.project:hover{
+.project:hover {
   transform: translateY(-2px);
   background: rgba(255,255,255,.09);
   box-shadow: 0 10px 26px rgba(0,0,0,.35);
 }
-.project a{
+.project a {
   color: #9dd6ff;
   text-decoration: none;
   border-bottom: 1px dashed rgba(157,214,255,.5);
   transition: color .15s ease, border-bottom-color .15s ease;
 }
-
 .project a:hover {
   color: #c5e6ff;
   border-bottom-color: transparent;
