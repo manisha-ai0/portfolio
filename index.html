@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Portfolio — Manisha Rani</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ********* SPACE BACKGROUND ********* -->
+  <div class="space" aria-hidden="true">
+    <!-- Stars (populated via tiny script) -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Orbits & Planets -->
+    <div class="orbit orbit--1">
+      <div class="planet planet--mars"   style="transform:translate(-50%,-50%) rotate(35deg) translateX(240px)"></div>
+    </div>
+    <div class="orbit orbit--2">
+      <div class="planet planet--neptune" style="transform:translate(-50%,-50%) rotate(140deg) translateX(350px)"></div>
+    </div>
+    <div class="orbit orbit--3">
+      <div class="planet planet--saturn"  style="transform:translate(-50%,-50%) rotate(260deg) translateX(490px)"></div>
+    </div>
+
+    <!-- Rocket 1 -->
+    <div class="rocket rocket--1">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- body -->
+        <path d="M32 4c8 6 14 18 14 28s-6 22-14 28c-8-6-14-18-14-28S24 10 32 4Z" fill="#f2f6ff" stroke="rgba(0,0,0,.25)" />
+        <!-- window -->
+        <circle cx="32" cy="24" r="6" fill="#90c2ff" stroke="rgba(0,0,0,.25)"/>
+        <!-- fins -->
+        <path d="M18 44l-8 6 10-2Z" fill="#ff8aa6"/><path d="M46 44l8 6-10-2Z" fill="#ff8aa6"/>
+        <!-- flame -->
+        <path class="flame" d="M28 56c2 6 8 6 10 0-3 2-7 2-10 0Z" fill="var(--accent)"/>
+      </svg>
+    </div>
+    <!-- Rocket 2 -->
+    <div class="rocket rocket--2">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M32 4c8 6 14 18 14 28s-6 22-14 28c-8-6-14-18-14-28S24 10 32 4Z" fill="#f2f6ff" stroke="rgba(0,0,0,.25)" />
+        <circle cx="32" cy="24" r="6" fill="#90c2ff" stroke="rgba(0,0,0,.25)"/>
+        <path d="M18 44l-8 6 10-2Z" fill="#ffd166"/><path d="M46 44l8 6-10-2Z" fill="#ffd166"/>
+        <path class="flame" d="M28 56c2 6 8 6 10 0-3 2-7 2-10 0Z" fill="var(--accent)"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ********* CONTENT ********* -->
+  <header>
+    <h1>Manisha Rani</h1>
+    <p>Aspiring AI Engineer • Developer</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>About Me</h2>
+      <p>
+        Hi! I’m Manisha, a passionate learner building projects every day.
+        My goal is to work in AI and tech innovation.
+      </p>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      
+      <div class="project">
+        <h3>Project 1: To-Do List App</h3>
+        <p>A simple app to manage tasks efficiently. Built with HTML, CSS, and JavaScript.</p>
+        <!-- replace with your real repo -->
+        <a href="https://github.com/manisha-ai0/To-Do-List.git" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+
+      <div class="project">
+        <h3>Project 2: Portfolio Website</h3>
+        <p>This portfolio website to showcase my work.</p>
+        <!-- replace with your real repo -->
+        <a href="https://github.com/manisha-ai0/portfolio.git" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="project">
+        <h3>Today’s Uploads</h3>
+        <p>Keeping the streak alive: add at least <strong>two</strong> repos daily.</p>
+      </div>
+      <div class="project">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:manisharani.ai@gmail.com">manisharani.ai@gmail.com</a></p>
+        <p>GitHub: <a href="https://github.com/manisha-ai0" target="_blank" rel="noopener">github.com/manisha-ai0</a></p>
+        <p>Instagram: <a href="https://instagram.com/jass_minnnneee" target="_blank" rel="noopener">@jass_minnnneee</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/manisha-rani-1b196a377" target="_blank" rel="noopener">linkedin.com/in/Manisha Rani</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Manisha Rani • Built with 🚀 & stars</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
